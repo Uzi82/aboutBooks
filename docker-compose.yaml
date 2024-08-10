@@ -35,9 +35,6 @@ services:
       - SERVER_PORT=8080
       - SPRING_DATASOURCE_URL=jdbc:postgresql://servicedb/schema
     restart: on-failure
-    volumes:
-       - backend-volume:/var/lib/backend/data
 volumes:
   db-data:
-  pgadmin-data:
-  backend-volume:
+  # pgadmin-data
