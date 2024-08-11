@@ -8,4 +8,5 @@ import lombok.Data;
 public class GetMessageResponse {
     Long id;
     String text;
+    Long author_id;
 }

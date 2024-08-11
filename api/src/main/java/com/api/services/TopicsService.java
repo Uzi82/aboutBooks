@@ -45,7 +45,8 @@ public class TopicsService {
                 topic.getDescription(),
                 topic.getMessages().stream().map(el -> new GetMessageResponse(
                         el.getId(),
-                        el.getText()
+                        el.getText(),
+                        el.getUser().getId()
                 )).toList()
         ), HttpStatus.OK);
     }
