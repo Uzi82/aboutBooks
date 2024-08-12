@@ -1,0 +1,67 @@
+.Header {
+    @apply 
+        relative
+        w-full
+        flex  gap-5 justify-between 
+        items-center min-h-20 py-6 px-36
+        bg-white
+        border-b-2
+        border-solid
+        border-gray;
+
+
+    &_logo {
+        @apply h-6 max-w-4 flex gap-2 cursor-pointer;
+    }
+    &_iconForm {
+        @apply float-end text-2xl text-black/50 min-md:hidden;
+    
+    }
+    .wrapper {
+        @apply w-[50%];
+    }
+    &_form {
+        @apply 
+            relative grow 
+            border-2 rounded-md
+            overflow-hidden
+            bg-white border-background
+            md:absolute
+            md:top-[100%]
+            md:left-0
+            md:w-full
+            md:hidden
+            min-lg:flex
+            shadow-sm;
+        
+        &.active {
+            @apply md:flex;
+        }    
+        &-input {@apply grow-[1] px-4 py-3 min-lg:order-2 outline-none}
+        &_button {
+            @apply 
+                min-h-full right-0
+                 px-4
+                md:hover:text-white
+                md:hover:bg-decor;
+            transition: 0.3s ease;
+            
+            &-text {@apply hidden md:block}
+            &-icon {@apply hidden min-lg:block}
+        }
+    }
+    
+    &_auth {
+        @apply flex justify-between gap-6 h-min;
+        &-buttons {
+            @apply 
+                flex justify-center items-center 
+                px-3 py-2 rounded-sm bg-background;
+            
+            &.active {
+                @apply text-white bg-decor;
+            }
+        }
+    }
+    
+}

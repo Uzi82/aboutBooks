@@ -1,13 +1,18 @@
+import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { fileURLToPath } from 'url'
+
+const setPath = (dir:string) => {
+  return path.resolve(__dirname,dir)
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: [
-      { find: "@", replacement: fileURLToPath(new URL('./src', import.meta.url))}
-    ]
+    alias: {
+      "libs": setPath("./src/libs"),
+      "pages": setPath("./src/pages"),
+    }
   }
 })
