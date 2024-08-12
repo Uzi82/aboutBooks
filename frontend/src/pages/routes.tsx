@@ -1,9 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
-import { MainPage } from "./MainPage";
 
-export const routes = createBrowserRouter([
+import Auth from "pages/Auth";
+import Main from 'pages/MainPage';
+import Layout from "pages/Layout";
+
+
+export default createBrowserRouter([
     {
         path: "/",
-        element: <MainPage />
-    }
-])
+        element: <Layout />,
+        children: [
+           {path: "/", element: <Main/>},
+           {path: "/auth/:modeForm", element: <Auth/>}
+        ]
+    },
+]);

@@ -1,0 +1,50 @@
+@layer base {
+    #root {
+        @apply flex flex-col min-w-[392px] bg-background h-screen;
+        main {
+            @apply flex gap-4 h-full w-full;
+        }
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-weight: 400;
+        // box-shadow: 0 0 2px red;
+    }
+
+    button, a {
+        cursor: pointer;
+    }
+    
+    img {
+        width: 100%;
+    }
+
+    ul, a {
+        text-decoration: none; 
+        list-style-type: none;
+    }
+
+    h1 {
+        font-size: clamp(36px, 2vw, 56px);
+        line-height: 125%;
+    }
+    h2 {
+        font-size: clamp(26px, 2vw, 36px);
+        line-height: 112%;
+    }
+
+    h3 {
+        font-size: clamp(18px,1.7vw,24px);
+        line-height: 100%;
+    }
+
+    body, span, li, a, p, h4 {
+        font-size: clamp(14px,1.1vw,16px);
+        line-height: 135%;
+        letter-spacing: 0.08em;
+        font-weight: 500;
+    }
+}
