@@ -1,11 +1,17 @@
 import 'libs/styles/components/Menu.scss';
 import { FaTags, FaListUl, FaCircleQuestion,FaTelegram , FaMessage, FaHeart, FaGithub, FaDiscord } from "react-icons/fa6";
 import { PiMedalFill } from "react-icons/pi";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
+
+const patternForShowSearcher = /^(\/signup)|(\/signin)/;
+ 
 
 export default function Main() {
-    return (
+    const location = useLocation();
+    
+    return  !patternForShowSearcher.test(location.pathname) &&
+    (
         <div className="Menu">
             <div className="Menu_navigate">
                 <ul className="wrapper">
