@@ -1,29 +1,16 @@
-.Auth {
+.Sign {
     @apply
         w-full h-full 
-        bg-white h-full flex 
+        bg-white flex 
         flex-col gap-4 justify-center items-center ;
 
-    
-    & > .wrapper {
-        @apply w-[Min(100%,380px)] min-h-[450px] py-4 flex justify-center relative  overflow-hidden;
-    }
 
     &_form {
         @apply 
-        absolute
+        relative
         bg-white
-        translate-x-[100%]
         w-[380px] flex flex-col gap-4 px-4;
   
-
-        &.__in.SignIn {
-            @apply translate-x-[0];
-        }
-        &.__up.SignUp {
-            @apply translate-x-[0];
-        }
-
         button {
             @apply
             rounded-sm

@@ -1,4 +1,4 @@
-import 'libs/styles/components/Header.scss';
+import 'libs/styles/bin/Header.scss';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { FaSearch } from "react-icons/fa";

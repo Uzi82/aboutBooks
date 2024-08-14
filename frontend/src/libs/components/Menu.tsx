@@ -1,4 +1,4 @@
-import 'libs/styles/components/Menu.scss';
+import 'libs/styles/bin/Menu.scss';
 import { FaTags, FaListUl, FaCircleQuestion,FaTelegram , FaMessage, FaHeart, FaGithub, FaDiscord } from "react-icons/fa6";
 import { PiMedalFill } from "react-icons/pi";
 import { Link, useLocation } from 'react-router-dom';
