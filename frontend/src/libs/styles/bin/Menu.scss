@@ -1,0 +1,82 @@
+@import "../settings.scss";
+
+
+.Menu {
+    $width: Min(80%,480px);
+    @apply 
+        fixed bottom-0 
+        flex justify-between 
+        rounded-md
+        h-20 px-2 bg-white;
+
+        width: $width;
+        left: calc(50% - (#{$width}/2));
+        box-shadow: 0px -4px 4px 0px rgba($color: $black, $alpha: 0.03);
+
+    &_navigate {
+        @apply flex gap-2 overflow-x-auto;
+
+        & > .wrapper {
+            @apply flex gap-2 border-r-2 border-black/10;
+            
+        }
+
+        &_item {
+            @apply 
+                flex px-6 cursor-pointer
+                justify-center items-center;
+                
+
+            &:hover {
+                box-shadow: 0 4px inset $decor;
+                background-color:  rgba($color: $decor, $alpha: 0.05);
+                path {
+                    @apply fill-black/40 ;
+                }
+            }
+
+            &:hover::before {
+                content: attr(title);
+                display: block;
+                width: 300px;
+                height: 30px;
+  
+                color: $decor;
+                background: $white ;
+                border-left: 3px solid $decor;
+                border-right: 3px solid $decor;
+                border-radius: 4px;
+                position: absolute;
+                text-align: center;
+                align-content: center;
+                left: calc(50% - 150px);
+                bottom: calc(100% + 15px); 
+                animation: show 1.5s ease-out;
+                @keyframes show {
+                    from {opacity: 0;}
+                    90% {opacity: 1;}
+                }
+               
+            }    
+            path {
+                @apply fill-black/20 ;
+            }
+        }
+    }
+
+    &_networks {
+        @apply 
+            flex gap-2 items-center flex-col py-6 px-2 justify-center bg-white ;
+          
+        &_icons {
+            @apply w-4 h-4;
+            path {
+                @apply fill-black/20 ;
+            }
+
+            &:hover path{
+                @apply fill-black/40 ;
+            }
+        }
+    }
+}

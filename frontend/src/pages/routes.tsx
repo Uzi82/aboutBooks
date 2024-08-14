@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Auth from "pages/Auth";
+import {SignIn, SignUp} from "pages/Sign";
 import Main from 'pages/MainPage';
 import Layout from "pages/Layout";
 
@@ -11,7 +11,8 @@ export default createBrowserRouter([
         element: <Layout />,
         children: [
            {path: "/", element: <Main/>},
-           {path: "/auth/:modeForm", element: <Auth/>}
+           {path: "/signin", element: <SignIn/>},
+           {path: "/signup", element: <SignUp/>}
         ]
     },
 ]);

@@ -1,9 +1,10 @@
-import 'libs/styles/components/Header.scss';
+import 'libs/styles/bin/Header.scss';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { FaSearch } from "react-icons/fa";
 import { useState } from 'react';
 
+const patternForShowSearcher = /^(\/signup)|(\/signin)/;
 
 function Header() {
     const location = useLocation();
@@ -16,7 +17,7 @@ function Header() {
             case "":  setSearcher("active"); break;
         }
     }
-    console.log(location)
+
     function toHome() {
         navigate('/');
     }
@@ -29,7 +30,7 @@ function Header() {
             </div>
 
             {   
-                !/^\/Auth/.test(location.pathname) && (
+                !patternForShowSearcher.test(location.pathname) && (
                     <div className="wrapper">
                         <FaSearch className='Header_iconForm' onClick={toggleSearcher}/>
                         <form className={`Header_form ${isActiveSearcher}`} method="get" >
@@ -51,10 +52,10 @@ function Header() {
 
             <div className="Header_auth">
                 <button className="Header_auth-buttons active">
-                    <Link to="/Auth/SignUp" reloadDocument>SignUp</Link>
+                    <Link to="/signup" reloadDocument>SignUp</Link>
                 </button>
                 <button className="Header_auth-buttons">
-                    <Link to="/Auth/SignIn" reloadDocument>SignIn</Link>
+                    <Link to="/signin" reloadDocument>SignIn</Link>
                 </button>
             </div>
         </header>

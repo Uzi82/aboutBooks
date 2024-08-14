@@ -1,4 +1,13 @@
+$white: #ffffff;
+$gray: #EAEAEA;
+$blue: #1682FD;
+$decor: #1abc9c;
+$black: #000000;
+$background: #FAFAFA;
+
+@tailwind base;
 @layer base {
+
     #root {
         @apply flex flex-col min-w-[392px] bg-background h-screen;
         main {
