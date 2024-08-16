@@ -23,6 +23,9 @@ export default function Input (Props: InputProps) {
     
     
     function handleChange({target}:React.ChangeEvent<HTMLInputElement> ){
+        Props.register.changeData((state) => {
+            state.value = target.value;
+        })
         
         if(pattern) {
             if (pattern.test(target.value)) {
@@ -33,7 +36,6 @@ export default function Input (Props: InputProps) {
             }
             else setError(null)
             
-          
             setInput(target.value);
         }
     };
@@ -45,6 +47,7 @@ export default function Input (Props: InputProps) {
                     name="input"
                     type={Props.type} 
                     onChange={handleChange} 
+                    autoComplete="off"
                     placeholder={Props.placeholder}/>
                 <label htmlFor="input">{Props.placeholder}</label>
             </div>

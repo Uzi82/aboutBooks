@@ -4,6 +4,8 @@ import { PropsWithChildren } from 'react';
 import Input, {formValidation} from 'libs/UI/Input';
 import useForm, { TypeStateForms } from 'libs/utils/useForm';
 
+import AuthService ,{ ISignIn, ISignUp } from 'api/api.auth';
+
 export default function Sign ({children}: PropsWithChildren) { 
     return ( 
         <div className="Sign">
@@ -13,13 +15,6 @@ export default function Sign ({children}: PropsWithChildren) {
 }
 
 
-interface ISignUp {
-    username: string,
-    email: string,
-    password: string,
-    aprovedPassword:string 
-}
-
 
 export function SignUp () {
     const {register, handleSubmit} = useForm<ISignUp>();
@@ -27,8 +22,6 @@ export function SignUp () {
     
     async function onSubmit(data: TypeStateForms<ISignUp>, e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log(data)
-        // if(data.password !== data.aprovedPassword) return;
     }
 
     return (
@@ -58,14 +51,30 @@ export function SignUp () {
 
 
 export function SignIn () {
-    const {register } = useForm<ISignUp>();
+    const {register, handleSubmit} = useForm<ISignIn>();
+
+    async function onSubmit(data: TypeStateForms<ISignUp>, e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const auth = new AuthService();
+
+        const resopnse = auth.signIn({
+            username: data.username!.value,
+            password: data.password!.value,
+        })
+        .then((data) => {
+            console.log(data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
 
     return (
         <Sign>
-            <form className={`Sign_form`}>
+            <form onSubmit={handleSubmit(onSubmit)} className={`Sign_form`}>
                 <Input register = {register('username', {
                     pattern: formValidation.username.pattern, 
-                    msgError: formValidation.username.msgError})}  type="text" placeholder="UserName"/>
+                    msgError: formValidation.username.msgError})}  type="text" placeholder="Username"/>
 
                 <Input register = {register('password', {
                     pattern: formValidation.password.pattern, 
