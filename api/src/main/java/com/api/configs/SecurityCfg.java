@@ -15,6 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -29,7 +32,7 @@ public class SecurityCfg {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors().disable()
+        http.cors().and()
                 .csrf().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
@@ -42,5 +45,16 @@ public class SecurityCfg {
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
+    }
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*"); // Укажите разрешенные источники
+        config.addAllowedHeader("*"); // Разрешенные заголовки
+        config.addAllowedMethod("*"); // Разрешенные методы
+        source.registerCorsConfiguration("/**", config); // Применяем ко всем путям
+        return new CorsFilter(source);
     }
 }
