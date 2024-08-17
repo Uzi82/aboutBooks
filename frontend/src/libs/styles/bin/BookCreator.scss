@@ -1,0 +1,56 @@
+%button {
+    @apply 
+        w-full py-3 text-center
+        bg-decor text-white
+        rounded-sm;
+}
+
+.BookCreator {
+    @apply  
+        flex gap-4 
+        w-[772px]
+        mx-auto
+        mt-36;
+
+    &_left {
+        &_coverBook {
+            @apply 
+                w-[244px] h-[287px] 
+                mb-4 bg-black rounded-sm border-black border-4;
+        }
+
+        &_uploader {
+            @extend %button;
+        }
+    }
+
+    &_right {
+        @apply w-[510px] flex flex-col gap-4;
+
+        .Input {
+            @apply p-0;
+
+            label {
+                @apply text-[14px];
+            }
+            input {
+                @apply rounded-sm;
+            }
+        }
+
+        &_genres {
+            @apply flex flex-row justify-start gap-2;
+            
+        }
+        &_buttons {
+            @apply flex gap-2;
+            &_item {
+                @extend %button;
+                &:last-child {
+                    @apply w-[40%];
+                }  
+            }
+        }
+    }
+
+}

@@ -10,7 +10,12 @@
         relative
         bg-white
         w-[380px] flex flex-col gap-4 px-4;
-  
+        
+        .Input {
+            @apply
+                border-background
+                border-2 px-2;
+        }
         button {
             @apply
             rounded-sm

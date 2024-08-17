@@ -8,7 +8,8 @@ import { returnRegister } from "libs/utils/useForm";
 
 interface InputProps {
     type: 'text'|'email'|'password',
-    placeholder: string, 
+    placeholder?: string, 
+    label?: string,
     pattern?: RegExp
     msgError?: string,
     register: returnRegister
@@ -46,7 +47,7 @@ export default function Input (Props: InputProps) {
                     type={Props.type} 
                     onChange={handleChange} 
                     placeholder={Props.placeholder}/>
-                <label htmlFor="input">{Props.placeholder}</label>
+                <label htmlFor="input">{Props.label}</label>
             </div>
             {   
                 pattern && (
