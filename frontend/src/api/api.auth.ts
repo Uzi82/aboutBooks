@@ -7,13 +7,9 @@ export default class AuthService implements IAuthService{
         return instance.post('/api/auth/login', {username, password});
     }
 
-    signUp({username,email,password, aprovedPassword}:ISignUp) {
-        if(password !== aprovedPassword) {
-            return 'password is incorrect';
-        } 
-        
-        return  instance.post('/api/auth/login', {
-            username,email,password
+    signUp({username,password}:ISignUp) {
+        return instance.post('/api/auth/register', {
+            username,password
         });
     }
 
@@ -41,7 +37,7 @@ export interface ISignIn {
 
 export interface ISignUp {
     username: string,
-    email: string,
+    // email: string,
     password: string,
-    aprovedPassword:string 
+    aprovedPassword?:string 
 }

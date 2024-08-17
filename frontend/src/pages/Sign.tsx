@@ -1,10 +1,14 @@
 import 'libs/styles/bin/Sign.scss';
+import {  useNavigate } from 'react-router-dom';
 import { PropsWithChildren } from 'react';
+
 
 import Input, {formValidation} from 'libs/UI/Input';
 import useForm, { TypeStateForms } from 'libs/utils/useForm';
 
 import AuthService ,{ ISignIn, ISignUp } from 'api/api.auth';
+
+
 
 export default function Sign ({children}: PropsWithChildren) { 
     return ( 
@@ -17,13 +21,26 @@ export default function Sign ({children}: PropsWithChildren) {
 
 
 export function SignUp () {
+    const navigate = useNavigate();
     const {register, handleSubmit} = useForm<ISignUp>();
 
     
     async function onSubmit(data: TypeStateForms<ISignUp>, e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-    }
+        const auth = new AuthService();
 
+        if(data.aprovedPassword!.value === data.password!.value) {
+            auth.signUp({
+                username: data.username!.value,
+                password: data.password!.value,
+            })
+            .then(() => {
+                navigate('/signin');
+            });
+        }
+
+    }
+    
     return (
         <Sign>
             <form onSubmit={handleSubmit(onSubmit)} className={`Sign_form`}>
@@ -31,9 +48,9 @@ export function SignUp () {
                     pattern: formValidation.username.pattern, 
                     msgError: formValidation.username.msgError})}  type="text" placeholder="UserName"/>
                     
-                <Input register = {register('email', {
+                {/* <Input register = {register('email', {
                     pattern: formValidation.email.pattern, 
-                    msgError: formValidation.email.msgError})}  type="email" placeholder="Email"/>
+                    msgError: formValidation.email.msgError})}  type="email" placeholder="Email"/> */}
 
                 <Input register = {register('password', {
                     pattern: formValidation.password.pattern, 
@@ -51,18 +68,20 @@ export function SignUp () {
 
 
 export function SignIn () {
+    const navigate = useNavigate();
     const {register, handleSubmit} = useForm<ISignIn>();
 
     async function onSubmit(data: TypeStateForms<ISignUp>, e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const auth = new AuthService();
 
-        const resopnse = auth.signIn({
+        auth.signIn({
             username: data.username!.value,
             password: data.password!.value,
         })
-        .then((data) => {
-            console.log(data)
+        .then(({data}) => {
+            localStorage.setItem('token', data);    
+            navigate('/');
         })
         .catch(error => {
             console.log(error)

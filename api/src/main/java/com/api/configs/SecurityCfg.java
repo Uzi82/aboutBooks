@@ -50,7 +50,7 @@ public class SecurityCfg {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
+
         config.addAllowedOrigin("*"); // Укажите разрешенные источники
         config.addAllowedHeader("*"); // Разрешенные заголовки
         config.addAllowedMethod("*"); // Разрешенные методы
