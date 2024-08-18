@@ -3,11 +3,11 @@ import {AxiosResponse} from 'axios';
 
 
 export default class AuthService implements IAuthService{
-    signIn ({username, password}:ISignIn) {
+    signIn ({username, password}:IAuth) {
         return instance.post('/api/auth/login', {username, password});
     }
 
-    signUp({username,password}:ISignUp) {
+    signUp({username,password}:IAuth) {
         return instance.post('/api/auth/register', {
             username,password
         });
@@ -24,20 +24,13 @@ export default class AuthService implements IAuthService{
 
 
 interface IAuthService {
-    signIn: (data:ISignIn) => Promise<AxiosResponse<any, any>>,
-    signUp: (data:ISignUp) => Promise<AxiosResponse<any, any>> | string,
+    signIn: (data:IAuth) => Promise<AxiosResponse<any, any>>,
+    signUp: (data:IAuth) => Promise<AxiosResponse<any, any>> | string,
     refreshToken: () =>  Promise<AxiosResponse<any, any>>;
     logout: () =>  Promise<AxiosResponse<any, any>>;
 }
 
-export interface ISignIn {
-    username: string, 
-    password: string,
-}
-
-export interface ISignUp {
+interface IAuth {
     username: string,
-    // email: string,
     password: string,
-    aprovedPassword?:string 
-}
+} 

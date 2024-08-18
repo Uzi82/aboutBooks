@@ -6,7 +6,7 @@ import { PropsWithChildren } from 'react';
 import Input, {formValidation} from 'libs/UI/Input';
 import useForm, { TypeStateForms } from 'libs/utils/useForm';
 
-import AuthService ,{ ISignIn, ISignUp } from 'api/api.auth';
+import AuthService  from 'api/api.auth';
 
 
 
@@ -19,6 +19,13 @@ export default function Sign ({children}: PropsWithChildren) {
 }
 
 
+
+export interface ISignUp {
+    username: string,
+    // email: string,
+    password: string,
+    aprovedPassword:string 
+}
 
 export function SignUp () {
     const navigate = useNavigate();
@@ -67,6 +74,12 @@ export function SignUp () {
 }
 
 
+export interface ISignIn {
+    username: string, 
+    password: string,
+}
+
+
 export function SignIn () {
     const navigate = useNavigate();
     const {register, handleSubmit} = useForm<ISignIn>();
@@ -84,7 +97,7 @@ export function SignIn () {
             navigate('/');
         })
         .catch(error => {
-            console.log(error)
+            // console.log(error)
         })
     }
 
