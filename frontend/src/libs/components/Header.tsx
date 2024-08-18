@@ -1,8 +1,10 @@
 import 'libs/styles/bin/Header.scss';
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { FaSearch } from "react-icons/fa";
-import { useState } from 'react';
+import { IoNotifications } from "react-icons/io5";
+
 
 const patternForShowSearcher = /^(\/signup)|(\/signin)/;
 
@@ -18,13 +20,18 @@ function Header() {
         }
     }
 
-    function toHome() {
+    function getToHome() {
+        navigate('/');
+    }
+
+    function toLogoutUser() {
+        localStorage.removeItem('token');
         navigate('/');
     }
 
     return (  
         <header className="Header">
-            <div className="Header_logo" onClick={toHome}>
+            <div className="Header_logo" onClick={getToHome}>
                 <img src="/book.svg" alt="AboutBooks is logo" />
                 <h4>About<strong>Books</strong></h4>
             </div>
@@ -49,15 +56,36 @@ function Header() {
                 )
                 
             }
-
-            <div className="Header_auth">
-                <button className="Header_auth-buttons active">
-                    <Link to="/signup" reloadDocument>SignUp</Link>
-                </button>
-                <button className="Header_auth-buttons">
-                    <Link to="/signin" reloadDocument>SignIn</Link>
-                </button>
-            </div>
+            {
+                localStorage.getItem('token') === null
+                ? (
+                    <div className="Header_auth">
+                        <button className="Header_auth-buttons active">
+                            <Link to="/signup" reloadDocument>SignUp</Link>
+                        </button>
+                        <button className="Header_auth-buttons">
+                            <Link to="/signin" reloadDocument>SignIn</Link>
+                        </button>
+                    </div>
+                )
+                : ( 
+                    <div className='Header_user'>
+                        <IoNotifications className='Header_user_notification'/>
+                        <details className="wrapper">
+                            <summary>
+                                <div className="Header_user_avatar">
+                                    <img src="" alt="" />
+                                </div>
+                            </summary>
+                            <ul className='Header_user_contextMenu'>
+                                <li className="Header_user_contextMenu_item">settings</li>
+                                <li className="Header_user_contextMenu_item" onClick={toLogoutUser}>logout</li>
+                            </ul>
+                        </details>
+                    </div>
+                )
+            }
+            
         </header>
     );
 }

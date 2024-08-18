@@ -13,6 +13,7 @@ export default defineConfig({
     alias: {
       "libs": setPath("./src/libs"),
       "pages": setPath("./src/pages"),
+      "api": setPath("./src/api"),
     }
   }
 })

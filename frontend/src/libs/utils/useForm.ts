@@ -8,12 +8,13 @@ export interface IOptions  {
 
 export interface IUserForm extends IOptions {
     isError: boolean,
+    value: string,
 }
 
 const DefaultUserForm: IUserForm = {
     isError: false,
+    value: '',
 }
-
 
 
 export interface returnRegister {
