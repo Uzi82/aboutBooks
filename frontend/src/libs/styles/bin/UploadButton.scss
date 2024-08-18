@@ -1,0 +1,11 @@
+.UploadButton {
+    position: relative;
+
+    input {
+        @apply absolute left-0 top-0 w-full h-full opacity-0 -z-10;
+    }
+
+    label {
+        @apply w-full h-full cursor-pointer;
+    }
+}

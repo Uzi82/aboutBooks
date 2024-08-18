@@ -1,22 +1,43 @@
 %button {
     @apply 
         w-full py-3 text-center
-        bg-decor text-white
+        bg-decor/90 text-white
+        font-medium
         rounded-sm;
 }
 
 .BookCreator {
     @apply  
         flex gap-4 
-        w-[772px]
+        w-[Min(772px,100%)]
+        h-auto
         mx-auto
-        mt-36;
+        mt-36
+        sm:flex-col
+        md:px-36;
 
     &_left {
         &_coverBook {
             @apply 
-                w-[244px] h-[287px] 
+                relative
+                w-[244px] h-[287px] mx-auto
                 mb-4 bg-black rounded-sm border-black border-4;
+            
+            img {
+                
+                width: 100%;
+                height: 100%;
+                object-fit:cover;
+            }
+
+            &::before {
+                content: "";
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: absolute;
+                background: linear-gradient(150deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.5) 100%);
+            }
         }
 
         &_uploader {
@@ -25,7 +46,9 @@
     }
 
     &_right {
-        @apply w-[510px] flex flex-col gap-4;
+        @apply 
+            w-[510px] flex flex-col gap-4 
+            md:w-full;
 
         .Input {
             @apply p-0;
@@ -39,7 +62,13 @@
         }
 
         &_genres {
-            @apply flex flex-row justify-start gap-2;
+            @apply flex flex-row flex-wrap justify-start gap-2;
+            &_item {
+                @apply px-3 p-2 cursor-pointer bg-white;
+                &.active {
+                    @apply bg-blue/90 text-white;
+                }
+            }
             
         }
         &_buttons {
@@ -47,10 +76,20 @@
             &_item {
                 @extend %button;
                 &:last-child {
-                    @apply w-[40%];
+                    @apply w-[50%];
                 }  
             }
         }
     }
 
+
+
+}
+
+.PopUp-wrapper {
+    @apply flex flex-col gap-4; 
+    
+    button {
+        @apply w-full bg-white py-4 text-black font-bold;
+    }
 }

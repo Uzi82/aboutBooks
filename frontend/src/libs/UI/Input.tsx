@@ -12,7 +12,8 @@ interface InputProps {
     label?: string,
     pattern?: RegExp
     msgError?: string,
-    register: returnRegister
+    register: returnRegister,
+    onChange?: (value: string) => void
 } 
 
 export default function Input (Props: InputProps) {
@@ -24,6 +25,13 @@ export default function Input (Props: InputProps) {
     
     
     function handleChange({target}:React.ChangeEvent<HTMLInputElement> ){
+        if(Props.onChange) {
+            Props.onChange(target.value);
+        }
+
+        Props.register.changeData((state) => {
+            state.value = target.value;
+        })
         
         if(pattern) {
             if (pattern.test(target.value)) {
@@ -34,7 +42,6 @@ export default function Input (Props: InputProps) {
             }
             else setError(null)
             
-          
             setInput(target.value);
         }
     };
@@ -46,6 +53,7 @@ export default function Input (Props: InputProps) {
                     name="input"
                     type={Props.type} 
                     onChange={handleChange} 
+                    autoComplete="off"
                     placeholder={Props.placeholder}/>
                 <label htmlFor="input">{Props.label}</label>
             </div>

@@ -1,0 +1,44 @@
+.PopUp {
+    @apply
+        flex
+        items-center
+        justify-center
+        fixed
+        top-0 left-0
+        w-full
+        h-full
+        z-50
+        bg-[#0000]/30;
+
+    $blur: 2px;
+    backdrop-filter: blur($blur);
+    -webkit-backdrop-filter: blur($blur);
+
+    & > .Newer {
+        @apply flex flex-col gap-2;
+
+        input {
+            @apply 
+                px-3 py-2
+                outline-none 
+                rounded-sm;
+        }
+
+        &>.wrapper {
+            @apply flex w-full justify-between; 
+        }
+        button {
+            @apply 
+                px-3 py-2
+                bg-black
+                rounded-sm
+                flex-grow
+                cursor-pointer
+                content-center
+                text-center
+                text-white
+                hover:bg-decor;
+            transition: 0.3s ease-in;
+        }
+    }
+}
