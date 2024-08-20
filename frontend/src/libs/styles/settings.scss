@@ -9,10 +9,7 @@ $background: #FAFAFA;
 @layer base {
 
     #root {
-        @apply flex flex-col min-w-[392px] bg-background h-screen;
-        main {
-            @apply flex gap-4 h-full w-full;
-        }
+        @apply flex flex-col min-w-[392px] min-h-screen bg-background pb-24;
     }
 
     * {

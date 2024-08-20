@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react';
 
 
 import Input, {formValidation} from 'libs/UI/Input';
-import useForm, { TypeStateForms } from 'libs/utils/useForm';
+import useForm, { FormEvent, TypeStateForms } from 'libs/utils/useForm';
 
 import AuthService ,{ ISignIn, ISignUp } from 'api/api.auth';
 
@@ -25,7 +25,7 @@ export function SignUp () {
     const {register, handleSubmit} = useForm<ISignUp>();
 
     
-    async function onSubmit(data: TypeStateForms<ISignUp>, e: React.FormEvent<HTMLFormElement>) {
+    async function onSubmit(data: TypeStateForms<ISignUp>, e?: React.FormEvent<HTMLFormElement>|any) {
         e.preventDefault();
         const auth = new AuthService();
 
@@ -71,7 +71,7 @@ export function SignIn () {
     const navigate = useNavigate();
     const {register, handleSubmit} = useForm<ISignIn>();
 
-    async function onSubmit(data: TypeStateForms<ISignUp>, e: React.FormEvent<HTMLFormElement>) {
+    async function onSubmit(data: TypeStateForms<ISignUp>, e:FormEvent) {
         e.preventDefault();
         const auth = new AuthService();
 

@@ -22,6 +22,9 @@ export default {
       padding: {
         '36':'clamp(12px,3vw,56px)'
       },
+      margin: {
+        '36':'clamp(12px,3vw,56px)'
+      },
 
       colors: {
         "white": "#ffffff",

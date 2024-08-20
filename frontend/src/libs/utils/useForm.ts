@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 export type TypeStateForms<T> = Partial<Record<keyof T, IUserForm>>
 
 export interface IOptions  {
@@ -22,31 +24,30 @@ export interface returnRegister {
     changeData: (cb: (oldState: IUserForm) => void) => void
 }
 
- 
+export type FormEvent = React.FormEvent<HTMLFormElement|HTMLButtonElement>;
 interface IHandleSubmit<T> {
-    SubmitHandler: (data: TypeStateForms<T>, e: React.FormEvent<HTMLFormElement>) => Promise<void>,  
+    SubmitHandler: (data: TypeStateForms<T>, e: FormEvent) => Promise<void>,  
 }
 
 export default function useForm<T>()  {
-    const stateForms:TypeStateForms<T> = {};
+    const stateForms = useRef<TypeStateForms<T>>({});
     
     function setInput(regName:keyof T, options?: IOptions) {
-        stateForms[regName] = {
+        stateForms.current[regName] = {
             ...options,
             ...DefaultUserForm
         };
     }
 
     function changeData(regName: keyof T) {
-        const state: IUserForm = stateForms[regName]!;
+        const state: IUserForm = stateForms.current[regName]!;
         return (cb: (oldState: IUserForm) => void) => cb.call([], state);
     }
 
 
     function handleSubmit(submitHandler: IHandleSubmit<T>["SubmitHandler"]) {      
-        // Here should be other code, that handle axios request from data a input elements, so ...
-        return (e:React.FormEvent<HTMLFormElement>) => {
-            submitHandler.call([], stateForms, e);
+        return (e:FormEvent) => {
+            submitHandler.call([], stateForms.current, e);
         } 
     }
 

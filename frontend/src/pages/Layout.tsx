@@ -10,9 +10,7 @@ export default function Layout () {
         <>
             <Header/>
             <Menu/>
-            <main>
-                <Outlet/>
-            </main>
+            <Outlet/>
         </>   
     )
 }

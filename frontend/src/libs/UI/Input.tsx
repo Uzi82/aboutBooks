@@ -8,10 +8,12 @@ import { returnRegister } from "libs/utils/useForm";
 
 interface InputProps {
     type: 'text'|'email'|'password',
-    placeholder: string, 
+    placeholder?: string, 
+    label?: string,
     pattern?: RegExp
     msgError?: string,
-    register: returnRegister
+    register: returnRegister,
+    onChange?: (value: string) => void
 } 
 
 export default function Input (Props: InputProps) {
@@ -23,6 +25,10 @@ export default function Input (Props: InputProps) {
     
     
     function handleChange({target}:React.ChangeEvent<HTMLInputElement> ){
+        if(Props.onChange) {
+            Props.onChange(target.value);
+        }
+
         Props.register.changeData((state) => {
             state.value = target.value;
         })
@@ -49,7 +55,7 @@ export default function Input (Props: InputProps) {
                     onChange={handleChange} 
                     autoComplete="off"
                     placeholder={Props.placeholder}/>
-                <label htmlFor="input">{Props.placeholder}</label>
+                <label htmlFor="input">{Props.label}</label>
             </div>
             {   
                 pattern && (
