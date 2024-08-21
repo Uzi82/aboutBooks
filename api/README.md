@@ -100,3 +100,79 @@ __POST__```/api/topics/createmessage``` - Создание сообщения п
 ```
 
 *Ничего не возвращает*
+
+## Книги
+
+### Создание книги
+__POST__```/api/books/createBook``` - Создание новой книги.
+
+Пример body запроса:
+```
+{
+    "name": "text",
+    "description": "text",
+    "author_id": number,
+    "genre_id": number
+}
+```
+
+*Ничего не возвращает*
+
+### Получение книги по названию
+__GET__```/api/books/getByName?name=name``` - Получение книги с названием "name".
+
+*Возвращается книга по примеру ниже*
+```
+{
+    "id": 1,
+    "name": "Книга 1"
+    "description": "Description of Книга 1",
+    "author_name": "name",
+    "author_id": 1,
+    "genre_name": "name",
+    "genre_id": 1
+}
+```
+
+### Получение книги по id
+__GET__```/api/books/getById?id=1``` - Получение книги с id 1.
+
+*Возвращается книга по примеру ниже*
+```
+{
+    "id": 1,
+    "name": "Книга 1"
+    "description": "Description of Книга 1",
+    "author_name": "name",
+    "author_id": 1,
+    "genre_name": "name",
+    "genre_id": 1
+}
+```
+
+### Получение книги по жанру
+__GET__```/api/books/getByGenre?id=1``` - Получение книги с жанром с id 1.
+
+*Возвращается книга по примеру ниже*
+```
+{
+    "id": 1,
+    "name": "Книга 1"
+    "description": "Description of Книга 1",
+    "author_name": "name",
+    "author_id": 1,
+    "genre_name": "name",
+    "genre_id": 1
+}
+```
+
+### Получение всех жанров
+__GET__```/api/books/getAllGenres``` - Получение жанров из бд.
+
+*Возвращается массив жанров по примеру ниже*
+```
+{
+    "id": 1,
+    "name": "name"
+}
+```

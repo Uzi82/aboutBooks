@@ -15,6 +15,9 @@ public class Topic {
     private String title;
     private String description;
     @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     @OneToMany(cascade = CascadeType.ALL)

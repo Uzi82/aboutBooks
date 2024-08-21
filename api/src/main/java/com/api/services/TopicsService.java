@@ -4,7 +4,9 @@ import com.api.dtos.CreateTopicRequest;
 import com.api.dtos.GetMessageResponse;
 import com.api.dtos.GetTopicDetailsResponse;
 import com.api.dtos.GetTopicResponse;
+import com.api.entities.Book;
 import com.api.entities.Topic;
+import com.api.interfaces.BookRepository;
 import com.api.interfaces.TopicRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,19 +22,25 @@ import java.util.Optional;
 public class TopicsService {
     private TopicRepository topicRepository;
     private UserService userService;
+    private BookRepository bookRepository;
     public ResponseEntity<?> getTheNewest(int limit) {
         Page<Topic> topics = topicRepository.findNewest(PageRequest.of(0, limit));
         return new ResponseEntity<>(topics.map(el -> new GetTopicResponse(
                 el.getId(),
                 el.getTitle(),
-                el.getDescription()))
+                el.getDescription(),
+                el.getBook().getId(),
+                el.getBook().getName()))
                 .stream().toArray(), HttpStatus.OK);
     }
     public ResponseEntity<?> createTopic(CreateTopicRequest createTopicRequest) {
+        Optional<Book> book = bookRepository.findById(createTopicRequest.getBook_id());
+        if(book.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         Topic topic = new Topic();
         topic.setUser(userService.getUser());
         topic.setDescription(createTopicRequest.getDescription());
         topic.setTitle(createTopicRequest.getTitle());
+        topic.setBook(book.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }
     public ResponseEntity<?> getTopic(Long id) {
@@ -54,7 +62,9 @@ public class TopicsService {
         return new ResponseEntity<>(topicRepository.findAllByUser(userService.getUser()).stream().map(el -> new GetTopicResponse(
                 el.getId(),
                 el.getTitle(),
-                el.getDescription()
+                el.getDescription(),
+                el.getBook().getId(),
+                el.getBook().getName()
         )), HttpStatus.OK);
     }
 }

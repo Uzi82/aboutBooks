@@ -6,5 +6,5 @@ import lombok.Data;
 public class CreateTopicRequest {
     private String title;
     private String description;
-
+    private Long book_id;
 }
